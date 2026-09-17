@@ -1,0 +1,38 @@
+name: test formula
+
+# The formula is generated on a Windows machine, where `brew` does not exist.
+# This is the only place it is ever actually built and installed, so it runs on
+# every push and weekly — a tap nobody exercises is a tap that is quietly broken
+# by the time someone tries to install from it.
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 5 * * 1" # Mondays
+  workflow_dispatch: {}
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Lint the formula
+        run: brew audit --formula Formula/anime-sh.rb
+
+      - name: Install from source
+        run: brew install --build-from-source --verbose Formula/anime-sh.rb
+
+      - name: Run the formula's own test block
+        run: brew test Formula/anime-sh.rb
+
+      - name: It actually runs
+        run: anime --version
