@@ -20,21 +20,34 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v5
+      # macOS runners ship Homebrew; Linux runners do not.
+      - name: Install Homebrew on Linux
+        if: runner.os == 'Linux'
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
 
-      # Both runner images ship Homebrew already; the setup action adds a
-      # dependency (and a failure mode) for nothing.
-      - name: Homebrew version
-        run: brew --version
+      - uses: actions/checkout@v5
+        with:
+          path: checkout
+
+      # `brew audit`/`install` on a bare path is disabled — they work on taps.
+      # Copying the checkout into Homebrew's own Taps directory tests *this*
+      # commit, rather than whatever happens to be pushed.
+      - name: Register the checkout as a tap
+        run: |
+          taps="$(brew --repository)/Library/Taps/anime123450"
+          mkdir -p "$taps"
+          cp -R checkout "$taps/homebrew-anime-sh"
 
       - name: Lint the formula
-        run: brew audit --formula Formula/anime-sh.rb
+        run: brew audit --formula anime123450/anime-sh/anime-sh
 
       - name: Install from source
-        run: brew install --build-from-source --verbose Formula/anime-sh.rb
+        run: brew install --build-from-source anime123450/anime-sh/anime-sh
 
       - name: Run the formula's own test block
-        run: brew test Formula/anime-sh.rb
+        run: brew test anime123450/anime-sh/anime-sh
 
       - name: It actually runs
         run: anime --version
