@@ -8,11 +8,11 @@ class AnimeSh < Formula
   sha256 "1afe3257b838f71c30d6dcac18afc60b0ca0b902cecd011a0b9323a190bef601"
   license "MIT"
 
-  depends_on "python@3.12"
   # mpv plays the video, so it is a hard dependency. ffmpeg is only
   # needed by `anime download`, and it is a heavy install. Homebrew
   # dropped formula options, so it is a caveat rather than an optional.
   depends_on "mpv"
+  depends_on "python@3.12"
 
   resource "aiosqlite" do
     url "https://files.pythonhosted.org/packages/4e/8a/64761f4005f17809769d23e518d915db74e6310474e733e3593cfc854ef1/aiosqlite-0.22.1.tar.gz"
