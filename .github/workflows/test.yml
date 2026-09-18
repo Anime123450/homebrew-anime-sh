@@ -17,14 +17,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # macos-latest is macOS 26, too new for prebuilt bottles: Homebrew
-        # falls back to compiling mpv's whole tree from source, which ran for
-        # 40 minutes without finishing. macos-15 has bottles.
-        os: [macos-15, ubuntu-latest]
+        # macos-latest is macOS 26, too new for prebuilt bottles: Homebrew fell
+        # back to compiling mpv's whole tree from source and ran 40 minutes
+        # without finishing. macos-15 has bottles.
+        include:
+          # macOS builds the whole thing in ~26 minutes. Linux is slower: it has
+          # to install Homebrew first and has bottles for less, so it gets its
+          # own budget rather than being capped at what macOS needs.
+          - os: macos-15
+            timeout: 40
+          - os: ubuntu-latest
+            timeout: 75
     runs-on: ${{ matrix.os }}
-    # A formula that cannot build in half an hour is a formula nobody will
-    # wait for either.
-    timeout-minutes: 30
+    timeout-minutes: ${{ matrix.timeout }}
     steps:
       # macOS runners ship Homebrew; Linux runners do not.
       - name: Install Homebrew on Linux
