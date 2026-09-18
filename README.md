@@ -8,10 +8,11 @@ brew install anime-sh
 anime
 ```
 
-> **This takes a while — about 25 minutes on macOS.** A tap has no prebuilt
-> bottles, so Homebrew compiles every dependency from source, and two of them
-> are slow: `pydantic-core` is Rust and `Pillow` is C against the image
-> libraries. It is a one-off; upgrades reuse what is already built.
+> **This takes a while: about 30 minutes on macOS, an hour on Linux.** Measured
+> in CI, not guessed. A tap has no prebuilt bottles, so Homebrew compiles every
+> dependency from source, and two of them are slow — `pydantic-core` is Rust and
+> `Pillow` is C against the image libraries. It is a one-off; upgrades reuse
+> what is already built.
 >
 > If you would rather not wait, and you do not mind Python being involved:
 >
@@ -34,7 +35,8 @@ see which sources actually work from your connection.
 ## macOS and Linux
 
 The formula builds anime-sh into its own virtualenv from PyPI sdists, so it
-works on both Apple silicon and Intel macOS, and on Linuxbrew.
+works on Apple silicon and Intel macOS, and on Linuxbrew. CI installs it from
+source on both on every push — macOS in ~31 minutes, Linux in ~66.
 
 ## Updating the formula
 
