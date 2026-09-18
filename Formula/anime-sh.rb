@@ -4,15 +4,26 @@ class AnimeSh < Formula
 
   desc "Watch anime from your terminal"
   homepage "https://github.com/Anime123450/anime-sh"
-  url "https://files.pythonhosted.org/packages/14/01/44d94c09048d89dd7efc7d6649bc703e6658568b9a222a6768c2be1a3b37/anime_sh-0.2.83.tar.gz"
-  sha256 "1afe3257b838f71c30d6dcac18afc60b0ca0b902cecd011a0b9323a190bef601"
+  url "https://files.pythonhosted.org/packages/38/df/2cc4f9401a3d78e212b01cdc26cc8e90cea0fca78182d8eea603a53b172b/anime_sh-0.2.84.tar.gz"
+  sha256 "c96fb1b68a5d0a86e426f3e17fd1062ba6f4e77774f7458954e3911223d1b577"
   license "MIT"
 
-  # mpv plays the video, so it is a hard dependency. ffmpeg is only
-  # needed by `anime download`, and it is a heavy install. Homebrew
+  # Homebrew builds every resource from its sdist, so the toolchains
+  # those sdists need are dependencies too. pydantic-core is Rust (via
+  # maturin) and Pillow is C against the image libraries - without these
+  # the build ran for 23 minutes and then died trying to build maturin.
+  depends_on "freetype" => :build
+  depends_on "jpeg-turbo" => :build
+  depends_on "libtiff" => :build
+  depends_on "little-cms2" => :build
+  # mpv plays the video, so it is a hard runtime dependency. ffmpeg is
+  # only needed by `anime download`, and it is a heavy install - Homebrew
   # dropped formula options, so it is a caveat rather than an optional.
   depends_on "mpv"
+  depends_on "openjpeg" => :build
   depends_on "python@3.12"
+  depends_on "rust" => :build
+  depends_on "webp" => :build
 
   resource "aiosqlite" do
     url "https://files.pythonhosted.org/packages/4e/8a/64761f4005f17809769d23e518d915db74e6310474e733e3593cfc854ef1/aiosqlite-0.22.1.tar.gz"
@@ -39,19 +50,9 @@ class AnimeSh < Formula
     sha256 "741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55"
   end
 
-  resource "cffi" do
-    url "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz"
-    sha256 "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be"
-  end
-
   resource "colorama" do
     url "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz"
     sha256 "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"
-  end
-
-  resource "curl-cffi" do
-    url "https://files.pythonhosted.org/packages/82/e1/730125c43e3e331d98e17af3cb310ba526b3f1101b7635ca23d976ebfcf5/curl_cffi-0.16.3.tar.gz"
-    sha256 "d15d0c2a35f2d75bec430c28946c2a833f421c85773bdb0795182cc5c515665b"
   end
 
   resource "h11" do
@@ -100,13 +101,8 @@ class AnimeSh < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/58/b9/8adc4e1b422b27fd88540ec7bf1f406f77ef393ec070e26fc430e914cde8/platformdirs-4.11.9.tar.gz"
-    sha256 "e2c66a8d384596cd98e3c4aea2d761df7bac95d9d8a2cc3946daa8cdafdaebc1"
-  end
-
-  resource "pycparser" do
-    url "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz"
-    sha256 "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29"
+    url "https://files.pythonhosted.org/packages/89/24/92d90bebedf197eb15b144367ce6fd4ad2de571927cd09dde190a36db8fc/platformdirs-4.11.10.tar.gz"
+    sha256 "9cd351c078ccf7dda1fdc5f8ccb9d8f5258984c63990e6df3627dde0b70b51d0"
   end
 
   resource "pydantic" do
