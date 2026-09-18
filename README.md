@@ -8,6 +8,19 @@ brew install anime-sh
 anime
 ```
 
+> **This takes a while — about 25 minutes on macOS.** A tap has no prebuilt
+> bottles, so Homebrew compiles every dependency from source, and two of them
+> are slow: `pydantic-core` is Rust and `Pillow` is C against the image
+> libraries. It is a one-off; upgrades reuse what is already built.
+>
+> If you would rather not wait, and you do not mind Python being involved:
+>
+> ```bash
+> uv tool install "anime-sh[tui]"   # seconds, from wheels
+> brew install mpv                  # still needed to play anything
+> ```
+
+
 mpv is installed with it. Downloads (`anime download`, `anime prefetch`) also
 need ffmpeg:
 
