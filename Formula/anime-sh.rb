@@ -4,8 +4,8 @@ class AnimeSh < Formula
 
   desc "Watch anime from your terminal"
   homepage "https://github.com/Anime123450/anime-sh"
-  url "https://files.pythonhosted.org/packages/38/df/2cc4f9401a3d78e212b01cdc26cc8e90cea0fca78182d8eea603a53b172b/anime_sh-0.2.84.tar.gz"
-  sha256 "c96fb1b68a5d0a86e426f3e17fd1062ba6f4e77774f7458954e3911223d1b577"
+  url "https://files.pythonhosted.org/packages/80/f3/328654fc263c51ffb3bfc952953f597fa48e7e3f067a25ab81e17db75d0f/anime_sh-0.2.85.tar.gz"
+  sha256 "26a22f8b119603167153c51280f2de5ba9abd8eefabad7e4dcbbd0bc78226438"
   license "MIT"
 
   depends_on "freetype" => :build
@@ -98,8 +98,8 @@ class AnimeSh < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/89/24/92d90bebedf197eb15b144367ce6fd4ad2de571927cd09dde190a36db8fc/platformdirs-4.11.10.tar.gz"
-    sha256 "9cd351c078ccf7dda1fdc5f8ccb9d8f5258984c63990e6df3627dde0b70b51d0"
+    url "https://files.pythonhosted.org/packages/17/c8/721b3855fe457da514fe249247d404b9b39c5d16532278f70ebaa6acf18b/platformdirs-4.12.2.tar.gz"
+    sha256 "eab5f70271a490ef74618bb314fbb86e3c7e82fa3b9c922c2ea0e0a1a155d329"
   end
 
   resource "pydantic" do
@@ -123,8 +123,8 @@ class AnimeSh < Formula
   end
 
   resource "python-dotenv" do
-    url "https://files.pythonhosted.org/packages/6a/53/ed9d74092561d4b01a2ef1349d52cdbc135e526c245f366b089cfca6de49/python_dotenv-1.2.3.tar.gz"
-    sha256 "a20a594dabeaa385725aa239d5244871c143ecb356add8a20fcf23773a6c3a35"
+    url "https://files.pythonhosted.org/packages/74/26/2fbeedb218a787a5eea551c7532cac4e009f83d689dd2faa0d0353473f86/python_dotenv-1.2.4.tar.gz"
+    sha256 "f0d53e69935a851c0dcc78f3ab7aaccd8cabef0b92382b576b824212902873c0"
   end
 
   resource "rich" do
