@@ -21,11 +21,15 @@ jobs:
         # back to compiling mpv's whole tree from source and ran 40 minutes
         # without finishing. macos-15 has bottles.
         include:
-          # macOS builds the whole thing in ~26 minutes. Linux is slower: it has
-          # to install Homebrew first and has bottles for less, so it gets its
-          # own budget rather than being capped at what macOS needs.
+          # Both get the same budget now. macOS used to finish in ~26 minutes
+          # inside 40, then 0.2.85 ran 40m22s and was cancelled on the timeout
+          # rather than on anything being wrong - the dependency tree grew and
+          # the old budget stopped fitting it. A job that cannot finish is a red
+          # cross that means nothing, so the budget follows the build rather
+          # than the build having to fit the budget.
+          # Measured on 0.2.85: Linux 49m52s, macOS over 40m (cancelled).
           - os: macos-15
-            timeout: 40
+            timeout: 75
           - os: ubuntu-latest
             timeout: 75
     runs-on: ${{ matrix.os }}
