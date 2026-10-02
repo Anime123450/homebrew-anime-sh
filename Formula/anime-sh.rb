@@ -4,23 +4,18 @@ class AnimeSh < Formula
 
   desc "Watch anime from your terminal"
   homepage "https://github.com/Anime123450/anime-sh"
-  url "https://files.pythonhosted.org/packages/aa/5d/4b69a16fa306d1fff2c0b660bb1492c128a27b23b6ffcbc8fc65bbfcf89c/anime_sh-0.2.87.tar.gz"
-  sha256 "c88d2ee7da116f06f6163269e0fefee3d4eedadca9b792ae241de7806f69e90a"
+  url "https://files.pythonhosted.org/packages/a6/6e/37f4c01187612109f3d541f6814e9cc3381ba146d49c101cbee14e0f7d90/anime_sh-0.2.89.tar.gz"
+  sha256 "fce3cbd23fe59ec52c02913f1783855e7705adba482f87ddde440afb9231e6a2"
   license "MIT"
 
-  depends_on "freetype" => :build
-  depends_on "jpeg-turbo" => :build
-  depends_on "libtiff" => :build
-  depends_on "little-cms2" => :build
-  depends_on "openjpeg" => :build
   depends_on "rust" => :build
-  depends_on "webp" => :build
 
   # mpv plays the video, so it is a hard runtime dependency. ffmpeg is
   # only needed by `anime download`, and it is a heavy install - Homebrew
   # dropped formula options, so it is a caveat rather than an optional.
   depends_on "mpv"
-  depends_on "python@3.12"
+  depends_on "pillow"
+  depends_on "python@3.13"
 
   resource "aiosqlite" do
     url "https://files.pythonhosted.org/packages/4e/8a/64761f4005f17809769d23e518d915db74e6310474e733e3593cfc854ef1/aiosqlite-0.22.1.tar.gz"
@@ -90,11 +85,6 @@ class AnimeSh < Formula
   resource "mdurl" do
     url "https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec958cb99bd3efefba235e65cdeb9c84d24a8293ba1d90/mdurl-0.1.2.tar.gz"
     sha256 "bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"
-  end
-
-  resource "pillow" do
-    url "https://files.pythonhosted.org/packages/1c/3d/bb7fca845737cf9d7dbde16ed1843984665ff2e0a518f5db43e77ec540b9/pillow-12.3.0.tar.gz"
-    sha256 "3b8182a766685eaa002637e28b4ec8d6b18819a0c71f579bf0dbaa5830297cce"
   end
 
   resource "platformdirs" do

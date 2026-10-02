@@ -21,13 +21,15 @@ jobs:
         # back to compiling mpv's whole tree from source and ran 40 minutes
         # without finishing. macos-15 has bottles.
         include:
-          # Both get the same budget now. macOS used to finish in ~26 minutes
-          # inside 40, then 0.2.85 ran 40m22s and was cancelled on the timeout
-          # rather than on anything being wrong - the dependency tree grew and
-          # the old budget stopped fitting it. A job that cannot finish is a red
-          # cross that means nothing, so the budget follows the build rather
-          # than the build having to fit the budget.
-          # Measured on 0.2.85: Linux 49m52s, macOS over 40m (cancelled).
+          # Both get the same budget. It was raised to 75 twice while the build
+          # kept growing into it, and the second time was the wrong fix: 32 of
+          # those minutes were Pillow being compiled from its sdist, and 0.2.89
+          # pours Homebrew's bottle instead. Measured since:
+          #   Linux  49m52s -> 13m57s   (0.2.87 was cancelled at 75m)
+          #   macOS  46m20s -> 11m03s
+          # 75 is now headroom rather than a fit, which is what it should have
+          # been. A budget that has to be raised every few releases is measuring
+          # something nobody looked at - here, one resource out of twenty-nine.
           - os: macos-15
             timeout: 75
           - os: ubuntu-latest
