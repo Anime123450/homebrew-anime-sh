@@ -4,8 +4,8 @@ class AnimeSh < Formula
 
   desc "Watch anime from your terminal"
   homepage "https://github.com/Anime123450/anime-sh"
-  url "https://files.pythonhosted.org/packages/80/f3/328654fc263c51ffb3bfc952953f597fa48e7e3f067a25ab81e17db75d0f/anime_sh-0.2.85.tar.gz"
-  sha256 "26a22f8b119603167153c51280f2de5ba9abd8eefabad7e4dcbbd0bc78226438"
+  url "https://files.pythonhosted.org/packages/aa/5d/4b69a16fa306d1fff2c0b660bb1492c128a27b23b6ffcbc8fc65bbfcf89c/anime_sh-0.2.87.tar.gz"
+  sha256 "c88d2ee7da116f06f6163269e0fefee3d4eedadca9b792ae241de7806f69e90a"
   license "MIT"
 
   depends_on "freetype" => :build
